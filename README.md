@@ -14,7 +14,7 @@ In this document I will outline the goals I established, the steps I took to acc
 
 ## Project Outline and Goals
 
-The source data used in this project was retrieved from AGU's Confex API (with metadata for author names, author affiliations, author ORCIDs if available, title, abstract, paper identifier as assigned by AGU, and DOI if available).
+The source data used in this project was retrieved from AGU's Confex API (with metadata for author names, author affiliations, author ORCIDs if available, title, abstract, and paper identifier as assigned by AGU).
 
 The main overall goal was to write a process that could retrieve data for a specific AGU conference, and from that data, curate records for ingest into ADS. My second priority was to make this process repeatable for other conferences in the future, as necessary for expanding coverage in the ADS. I split up my overal goal into two major tasks:
 
