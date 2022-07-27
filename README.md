@@ -39,6 +39,8 @@ Once I was able to retrieve both sets of data (Papers and all Role results), my 
 In order to accomplish this second task, I first conducted some data cleanup and transformation. I cleaned up some HTML in the abstracts and titles, and made some transformations, such as generating the affilliations to include ORCIDs, and stringing together publication information. Then, I grouped together the authors and affiliations for each paper, and joined them to their respective papers by "PaperID".
   
 Finally, I converted each metadata point to a list, and zipped them together into individual records. At that point, I was able to convert the data set to json, and run each json record through the ADS Serializer, transforming the json records into ADS Tagged Format.
+ 
+ <insert info about serializer here.
   
 At last, I completed my goal of curating the AGU Fall Meeting 2021 records, and sent them to our Data Ingest and Curation expert on the ADS Team for ingest.
 
