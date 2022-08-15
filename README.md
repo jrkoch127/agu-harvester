@@ -14,7 +14,7 @@ In this document I will outline the goals I established, the steps I took to acc
 
 ## Project Outline and Goals
 
-[Project Notebook: AGU Harvester Notebook](https://github.com/jrkoch127/agu-harvester/blob/main/AGU_Harvester.ipynb)
+[Project Notebook: AGU Harvester Notebook - VERSION 1](https://github.com/jrkoch127/agu-harvester/blob/main/AGU_Harvester.ipynb)
 
 The source data used in this project was retrieved from AGU's Confex API (with metadata for author names, author affiliations, author ORCIDs if available, title, abstract, and paper identifier as assigned by AGU).
 
@@ -52,7 +52,7 @@ At last, I completed my goal of curating the AGU Fall Meeting 2021 records, and 
 
 [Project Notebook: AGU Harvester - VERSION 2](https://github.com/jrkoch127/agu-harvester/blob/main/AGU_Harvester-V2.ipynb)
 
-After successfully harvesting data, transforming it, and curating the papers for ADS ingest, I went back to refine my python and make sure it would be repeatable in future for other AGU meetings we want to ingest. Running my script again, I kept having issues with the Confex API in that it was performing too slowly when trying to retrieve the Role/Affiliation metadata. With this in mind, I created a workaround, "Version 2" that I could use in the event my original script isn't getting the data I need for future meetings. 
+After successfully harvesting data, transforming it, and curating the papers for ADS ingest, I went back to refine my python and make sure it would be repeatable in the future for other AGU meetings we want to ingest. Running my script again, I kept having issues with the Confex API in that it was performing too slowly when trying to retrieve the Role/Affiliation metadata. With this in mind, I created a workaround, "Version 2" that I could use in the event my original script isn't getting the data I need for future meetings. 
 
 Version 2 is mostly unchanged from the original, except for the middle section where I connect to the Roles API. Where in the first version, I dump the role results to an excel file, in this version I save individual json files for each role. Then I will load the data into an excel sheet and resume my original process. This of course had me saving over 100K json files, but on the upside it was easier to pause and resume my API requests as needed. It took me a few days to completely obtain all the json files, but if it's performing as needed, I can easily use this as a backup plan.
 
