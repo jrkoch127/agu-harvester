@@ -1,20 +1,18 @@
 # AGU Harvester
-Goal: Harvest abstracts/papers of the AGU Fall Meeting 2021 for ingest to ADS. 
+Goal: Harvest abstracts/papers of the AGU Fall Meeting for ingest to ADS. 
 Includes documentation, Jupyter notebooks, and files for this project.
 
 ## Harvesting from AGU's API to Include as Content in ADS
 
 Recently NASA has asked the Astrophysics Data System to develop a plan to expand its service from Astrophysics to cover all five scientific disciplines supported by NASA’s Science Mission Directorate (Heliophysics, Planetary Science, Astrophysics, Earth Science, Biophysics). The initial phase of this expansion, into Planetary Science and Heliophysics, has now been approved and funded ([Accomazzi 2021](https://ui.adsabs.harvard.edu/abs/2021AAS...23813203A/abstract)). Over the past year we developed a census to ensure research areas such as Space Science, Astrobiology, Aeronomy and Solar Physics are properly accounted for and represented in our database. The ultimate goal of this effort is to provide the same level of support for these disciplines as ADS currently provides for Astrophysics: current and accurate coverage of both refereed and gray literature, preprints, data and software. We expect that enhanced search capabilities will be developed in due time through collaborations with partners and stakeholders.
 
-The project described in this document is aims to assess the conference proceedings of AGU Fall Meeting 2021, retrieve the abstracts' metadata, and transform the data, and curate them as individual bibliographic records in a format that can be ingested into ADS's collection. This is one example of ADS’s goal to expand partnership connections, and to increase access to scientific data and literature. The results of this project will be a step toward fulfilling ADS coverage of literature relevant in Earth and Space Sciences.
+The project described in this document is aims to assess the conference proceedings of the annual AGU Fall Meeting, retrieve the abstracts' metadata, and transform the data, and curate them as individual bibliographic records in a format that can be ingested into ADS's collection. This is one example of ADS’s goal to expand partnership connections, and to increase access to scientific data and literature. The results of this project will be a step toward fulfilling ADS coverage of literature relevant in Earth and Space Sciences.
 
 As a Librarian for Digital Technologies Development to the ADS Team supporting curation efforts and assisting in collection management, this appealed to my interests as I have been actively seeking new projects to hone my Python skills and learn new methods to curate content for the ADS. Jupyter Notebook is especially useful for beginner Python users because it helps break up scripts into more manageable blocks (cells) and notes, findings and documentation can be included along the way.
  
 In this document I will outline the goals I established, the steps I took to accomplish them, and lessons learned. To accomplish this project, I used a combination of my own knowledge and expertise, read API documentation, searched the internet for solutions as needed, and collaborated with team members to debug and refine my code.
 
 ## Project Outline and Goals
-
-[Project Notebook: AGU Harvester Notebook - VERSION 1](https://github.com/jrkoch127/agu-harvester/blob/main/AGU_Harvester.ipynb)
 
 The source data used in this project was retrieved from AGU's Confex API (with metadata for author names, author affiliations, author ORCIDs if available, title, abstract, and paper identifier as assigned by AGU).
 
@@ -28,7 +26,7 @@ The main overall goal was to write a process that could retrieve data for a spec
  
 ## <a name="agu-api">Task 1: Retrieve Paper and Author data from AGU API</a>
   
-Accomplishing this first task meant connecting to AGU's Confex API, and pulling the Paper data specific to the Fall Meeting 2021 (meeting code 'fm21'). To access this data, I needed to make an API request to "https://agu.confex.com/agu/fm21/meetingapi.cgi/Paper". From there I was able to retrieve title, abstract, and DOI as available, however I found that I needed to look further for author names, affiliations, and ORCIDs. Upon reading the API documentation and inquiring Confex about the specifics, I discovered that I would need to also retrieve 'role' identifiers for each paper. The data for each paper points to Roles that indicate the authors' names, affiliations, ORCIDs, and the order in the author list. Therefore, I had to take additional steps to query a separate Roles path ("https://agu.confex.com/agu/fm21/meetingapi.cgi/{RoleID}") in the API to retrieve individual author metadata associated with each paper. Since the AGU API only seemed to support retrieving author data one "role" at a time, there was no option but to cycle through the entire "roles" list, one by one out of approximately 105 thousand.
+Accomplishing this first task meant connecting to AGU's Confex API, and pulling the Paper data specific to the meeting. To access this data, I needed to make an API request to "https://agu.confex.com/agu/{meetingcode}/meetingapi.cgi/Paper". From there I was able to retrieve title, abstract, and DOI as available, however I found that I needed to look further for author names, affiliations, and ORCIDs. Upon reading the API documentation and inquiring Confex about the specifics, I discovered that I would need to also retrieve 'role' identifiers for each paper. The data for each paper points to Roles that indicate the authors' names, affiliations, ORCIDs, and the order in the author list. Therefore, I had to take additional steps to query a separate Roles path ("https://agu.confex.com/agu/{meetingcode}/meetingapi.cgi/{RoleID}") in the API to retrieve individual author metadata associated with each paper. Since the AGU API only seemed to support retrieving author data one "role" at a time, there was no option but to cycle through the entire "roles" list, one by one out of approximately 100 thousand.
   
 Once I was able to retrieve both sets of data (Papers and all Role results), my next task was to merge the data and join the authors to their papers so that I could curate records.
 </details>
