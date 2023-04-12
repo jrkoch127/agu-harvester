@@ -41,18 +41,16 @@ In order to accomplish this second task, I first conducted some data cleanup and
 Finally, I converted each metadata point to a list, and zipped them together into individual records. At that point, I was able to convert the data set to json, and run each json record through the ADS PyIngest Serializer, transforming the json records into ADS Tagged Format.
  
 ADS [PyIngest](https://github.com/adsabs/adsabs-pyingest) is a collection of python parsers, validators, and serializers for the ADS Ingest Pipeline. Working with my team, I found that the PyIngest Classic Serializer gave me the best way to parse my json records and transform them into ADS Tagged Format records. It was wonderfully easy to use and helped me accomplish my goal of creating ADS Tagged records for ingest into the collection. 
-  
-At last, I completed my goal of curating the AGU Fall Meeting 2021 records, and sent them to our Data Ingest and Curation expert on the ADS Team for ingest.
 
 </details>
 
 ## Version 2
 
-[Project Notebook: AGU Harvester - VERSION 2](https://github.com/jrkoch127/agu-harvester/blob/main/AGU_Harvester-V2.ipynb)
+[Project Notebook: AGU Harvester - VERSION 2](https://github.com/jrkoch127/agu-harvester/blob/main/AGU_Harvester-V2%20(5).ipynb)
 
-After successfully harvesting data, transforming it, and curating the papers for ADS ingest, I went back to refine my python and make sure it would be repeatable in the future for other AGU meetings we want to ingest. Running my script again, I kept having issues with the Confex API in that it was performing too slowly when trying to retrieve the Role/Affiliation metadata. With this in mind, I created a workaround, "Version 2" that I could use in the event my original script isn't getting the data I need for future meetings. 
+After successfully harvesting data, transforming it, and curating the papers for ADS ingest, I went back to refine my python and make sure it would be repeatable in the future for other AGU meetings we want to ingest. Running my script again, I kept having issues with the Confex API in that it was performing too slowly when trying to retrieve the Role/Affiliation metadata and appending it to a data frame. With this in mind, I created a workaround, "Version 2" that is much more efficient.
 
-Version 2 is mostly unchanged from the original, except for the middle section where I connect to the Roles API. Where in the first version, I dump the role results to an excel file, in this version I save individual json files for each role. Then I will load the data into an excel sheet and resume my original process. This of course had me saving over 100K json files, but on the upside it was easier to pause and resume my API requests as needed. It took me a few days to completely obtain all the json files, but if it's performing as needed, I can easily use this as a backup plan.
+The main difference with Version 2 is in the way it treats the Role queries. This version saves the data locally as json files and later will push the data to a DataFrame. This makes it easier to stop/start my queries at any point and pick up where I left off. Where in the first version, I dump the role results to an excel file, in this version I save individual json files for each role. Then I will load the data into an excel sheet and resume my original process of merging the affiliations and papers.
 
 ## Lessons Learned
 
@@ -62,4 +60,4 @@ Version 2 is mostly unchanged from the original, except for the middle section w
 
 ## Results & Conclusions
 
-Overall this was a great opportunity for me to learn and practice wrangling large amounts of data from APIs. It was extra helpful when I started to include print messages with timestamps, which helped me gauge how long it would take to obtain data from an API. In the future it would be great to figure out if I can write a message that tells me a metric estimate of how long the API requests will take until finished, and a running percentage. The original version lapsed about 4 hours, and Version 2 was much longer with the pausing and resuming.
+Overall this was a great opportunity for me to learn and practice wrangling large amounts of data from APIs. It was extra helpful when I started to include print messages with timestamps, which helped me gauge how long it would take to obtain data from an API. In the future it would be great to figure out if I can write a message that tells me a metric estimate of how long the API requests will take until finished, and a running percentage.
